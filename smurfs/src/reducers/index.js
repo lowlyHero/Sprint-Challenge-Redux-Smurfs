@@ -4,31 +4,34 @@ import {
   FETCH_SMURFS_FAIL
 } from '../actions'
 
-
 const initialState = {
    smurfs: [],
-   fetchingSmurfs: false,
-  //  addingSmurf: false
-  //  updatingSmurf: false
-  //  deletingSmurf: false
+   isLoading: false,
    error: null
  };
 
  function reducer(state = initialState, action) {
    switch(action.type) {
      case FETCH_SMURF: 
-      return {
-       ...state,
+       return {
+        ...state,
+        isLoading: true
      };
      case FETCH_SMURFS_SUCCESS:
        return {
          ...state,
+         smurfs: action.payload,
+         isLoading: false,
+         error: ''
        };
        case FETCH_SMURFS_FAIL:
          return {
            ...state,
+           isLoading: false,
            error: action.payload
-         }
+         };
+         default:
+           return state;
    }
  }
 
