@@ -9,18 +9,17 @@ class AddSmurf extends Component {
         }
       }
 
-    handleChange = e => {
-        this.setState(prevState => ({
-          newSmurf: {
-            ...prevState.newSmurf,
-            [e.target.name] : e.target.value
-          }
-        }))
-      }
+    handleChange = (e) => {
+        this.setState({
+            name: e.target.value,
+            age: e.target.value,
+            height: e.target.value
+        })
+    }
     
       handleSubmit = (e) => {
         e.preventDefault();
-        this.props.addTodo(this.state);
+        this.props.addSmurf(this.state);
         this.setState({
             name: '',
             age: '',
@@ -32,7 +31,11 @@ class AddSmurf extends Component {
           return (
               <div>
                   <form onSubmit={this.handleSubmit}>
-                      <input type='text' onChange={this.handleChange} value={this.state.addSmurf} />  
+                      <label>Add a New Smurf: </label>
+                      <input type='text' onChange={this.handleChange} value={this.state.name} />  
+                      <input type='number' onChange={this.handleChange} value={this.state.age} />
+                      <input type='number' onChange={this.handleChange} value={this.state.height} />
+                      <button>Add Smurf</button>
                   </form>
               </div>
           )

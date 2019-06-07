@@ -10,10 +10,6 @@ class App extends Component {
     smurfs: []
   }
 
-  componentDidMount() {
-    this.props.getSmurfs();
-  }
-
   addSmurf = (smurf) => {
     smurf.id = Date.now();
     let smurfs = [...this.state.smurfs, smurf];
