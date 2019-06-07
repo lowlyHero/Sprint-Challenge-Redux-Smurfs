@@ -1,41 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { getSmurfs, addSmurf } from '../actions';
+import AddSmurf from '../components/AddSmurf';
+import { getSmurfs } from '../actions';
 
 import './App.css';
 
 class App extends Component {
   state = {
-    addSmurf: {
-      name: '',
-      age: '',
-      height: ''
-    }
+    smurfs: []
   }
 
   componentDidMount() {
     this.props.getSmurfs();
   }
 
-  handleChange = e => {
-    this.setState(prevState => ({
-      newSmurf: {
-        ...prevState.newSmurf,
-        [e.target.name] : e.target.value
-      }
-    }))
-  }
-
-  newSmurf = e => {
-    e.preventDefault();
-    this.props.addSmurf(this.state.newSmurf);
+  addSmurf = (smurf) => {
+    smurf.id = Date.now();
+    let smurfs = [...this.state.smurfs, smurf];
     this.setState({
-      newSmurf: {
-        name: '',
-        age: '',
-        height: ''
-      }
+      smurfs
     })
   }
 
@@ -52,12 +35,7 @@ class App extends Component {
           </div>
         )
       })}</span>
-      <form onSubmit={this.addSmurf}>
-      <input type='text' name='name' value={this.state.newSmurf.name} onChange={this.handleChange} />
-      <input type='number' name='age' value={this.state.newSmurf.age} onChange={this.handleChange} />
-      <input type='number' name='height' value={this.state.newSmurf.height} onChange={this.handleChange} />
-      <button>Add Smurf</button>
-      </form>
+      <AddSmurf addSmurf={this.addSmurf} />
     </div>
     );
   }
@@ -66,11 +44,9 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   smurfs: state.smurfs,
-  isLoading: state.isLoading,
-  error: state.error
 });
 
 export default connect(
   mapStateToProps,
-  { getSmurfs, addSmurf }
+  { getSmurfs }
 )(App);
