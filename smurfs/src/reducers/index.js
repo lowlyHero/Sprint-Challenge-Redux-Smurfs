@@ -1,11 +1,14 @@
 import {
   FETCH_SMURF,
   FETCH_SMURFS_SUCCESS,
-  FETCH_SMURFS_FAIL
+  FETCH_SMURFS_FAIL,
+  ADD_SMURF,
+  ADD_FAIL
 } from '../actions';
 
 const initialState = {
    smurfs: [],
+   addingSmurf: false,
    isLoading: false,
    error: ''
  };
@@ -30,6 +33,18 @@ const initialState = {
            isLoading: false,
            error: action.payload
          };
+         case ADD_SMURF:
+           return {
+             ...state,
+             addingSmurf: true,
+             isLoading: false,
+             error: ''
+           }
+           case ADD_FAIL: 
+           return {
+             ...state,
+             error: action.payload
+           }
          default:
            return state;
    }
