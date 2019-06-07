@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+
 import { getSmurfs } from '../actions';
 
 import './App.css';
@@ -15,9 +16,9 @@ const App = props => {
       <h1>Smurfs!</h1>
       {props.smurfs && (
         <div>
-        <p>{props.smurfs.name}</p>
-        <p>{props.smurfs.height}</p>
-        <p>{props.smurfs.age}</p>
+          <p>{props.smurfs.name}</p>
+          <p>{props.smurfs.height}</p>
+          <p>{props.smurfs.age}</p>
        </div>
       )}
  

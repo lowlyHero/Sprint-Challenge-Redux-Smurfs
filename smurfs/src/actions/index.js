@@ -13,13 +13,13 @@ export const getSmurfs = () => dispatch => {
    .then(res => {
     dispatch({
       type: FETCH_SMURFS_SUCCESS,
-      payload: res.data.results
-    })
+      payload: res.data
+    });
    })
     .catch(err => {
-    dispatch({
+     dispatch({
       type: FETCH_SMURFS_FAIL,
       payload: err
-    })
-  })
-}
+    });
+  });
+};
